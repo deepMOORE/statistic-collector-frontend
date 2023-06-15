@@ -34,6 +34,7 @@ export class LineChartComponent implements OnInit {
         ]
       },
       options: {
+        animation: false,
         aspectRatio: 4
       }
     });
