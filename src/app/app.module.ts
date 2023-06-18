@@ -6,19 +6,26 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContentComponent } from './content/content.component';
 import { LineChartComponent } from './line-chart/line-chart.component';
+import {StatsService} from "./stats.service";
+import { HttpClientModule } from '@angular/common/http';
+import { EntityComponent } from './entity/entity.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     ContentComponent,
-    LineChartComponent
+    LineChartComponent,
+    EntityComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    StatsService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

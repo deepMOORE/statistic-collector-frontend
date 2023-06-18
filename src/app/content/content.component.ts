@@ -1,25 +1,53 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {StatsService} from "../stats.service";
+import {StatsPeriodItem} from "../data/stats";
+import {EntityService} from "../entity.service";
+import {EntityShort} from "../data/entities";
 
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.css'],
+  providers: [
+    StatsService,
+  ],
   encapsulation: ViewEncapsulation.None,
 })
-export class ContentComponent {
-  entities: any[] = [
-    { name: '2023-01-01', value: 11 },
-    { name: '2023-01-01', value: 22 },
-    { name: '2023-02-01', value: 33 },
-    { name: '2023-03-01', value: 44 },
-    { name: '2023-04-01', value: 55 },
-    { name: '2023-05-01', value: 66 },
-    { name: '2023-06-01', value: 77 },
-    { name: '2023-07-01', value: 88 },
-    { name: '2023-08-01', value: 99 },
-    { name: '2023-09-01', value: 110 },
-    { name: '2023-10-01', value: 121 },
-    { name: '2023-11-01', value: 132 },
-    { name: '2023-12-01', value: 143 },
-  ];
+export class ContentComponent implements OnInit {
+  public stats: StatsPeriodItem[] = [];
+  public entities: EntityShort[] = [];
+
+  public selectedEntity: EntityShort|null;
+
+  constructor(
+    private readonly statsService: StatsService,
+    private readonly entityService: EntityService,
+  ) {
+    this.selectedEntity = null;
+  }
+
+  public onSelect(entity: EntityShort): void {
+    if (entity.id === this.selectedEntity?.id) {
+      return;
+    }
+
+    this.selectedEntity = entity;
+
+    this.stats = [];
+    this.statsService.stats(entity.id)
+      .subscribe(
+        (items: StatsPeriodItem[]) => {
+          this.stats = items;
+        }
+      );
+  }
+
+  public ngOnInit(): void {
+    this.entityService.getAllArticles()
+      .subscribe(
+        (items: EntityShort[]) => {
+          this.entities = items;
+        }
+      );
+  }
 }

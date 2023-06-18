@@ -1,7 +1,18 @@
 <div class="content-wrapper">
+  <div *ngIf="entities.length > 0" class="entities">
+    <div
+      class="entity"
+      *ngFor="let entity of entities"
+      (click)="onSelect(entity)"
+      [class.selected]="entity === selectedEntity"
+    >
+      <span>{{entity.id}}, {{entity.content}}</span>
+    </div>
+  </div>
   <div class="content">
-    <app-line-chart>
-
-    </app-line-chart>
+    <app-line-chart
+      *ngIf="stats.length > 0"
+      [stats]="stats"
+    ></app-line-chart>
   </div>
 </div>
