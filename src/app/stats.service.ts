@@ -14,11 +14,11 @@ export class StatsService {
   ) {
   }
 
-  public stats(articleId: number): Observable<StatsPeriodItem[]> {
+  public stats(articleId: number, start: Date, end: Date): Observable<StatsPeriodItem[]> {
     const body = {
       articleId: articleId,
-      start: new Date(2022, 9, 1, 0, 0, 0),
-      end: new Date(2023, 7, 1, 0, 0, 0),
+      start: start,
+      end: end,
     };
 
     return this.http.post<ApiResponse<StatsPeriodItem>>('http://127.0.0.1:8000/api/stats', body)

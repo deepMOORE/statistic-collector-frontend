@@ -10,6 +10,29 @@
     </div>
   </div>
   <div class="content">
+    <div class="stat-periods">
+      <span
+        class="stat-period-name"
+        (click)="onSelectPeriod(StatPeriod.Last3Month)"
+        [class.selected]="statPeriod === StatPeriod.Last3Month"
+      >
+        {{StatPeriod.Last3Month}}
+      </span>
+      <span
+        class="stat-period-name"
+        (click)="onSelectPeriod(StatPeriod.Last6Month)"
+        [class.selected]="statPeriod === StatPeriod.Last6Month"
+      >
+        {{StatPeriod.Last6Month}}
+      </span>
+      <span
+        class="stat-period-name"
+        (click)="onSelectPeriod(StatPeriod.LastYear)"
+        [class.selected]="statPeriod === StatPeriod.LastYear"
+      >
+        {{StatPeriod.LastYear}}
+      </span>
+    </div>
     <app-line-chart
       *ngIf="stats.length > 0"
       [stats]="stats"

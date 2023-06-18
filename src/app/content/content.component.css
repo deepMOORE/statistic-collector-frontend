@@ -25,3 +25,17 @@
   font-weight: bold;
   padding-left: 1px;
 }
+
+.stat-periods {
+  display: flex;
+  flex-direction: row;
+}
+
+.stat-period-name {
+  width: 120px;
+  font-style: italic;
+}
+
+.stat-period-name.selected {
+  font-weight: bold;
+}
